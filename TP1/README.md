@@ -52,7 +52,7 @@ Tester votre programme en vérifiant que les deux fichiers sont identiques (comm
 ./cp_sys <fichier1> <fichier2> 
 ```
 
-Questions :
+**Questions :**
 
 1. Dans quel fichier `man` se trouvent les informations sur les constantes `flags` correspondant au deuxième paramètre de `open` ?
 2. Dans quel fichier `man` se trouvent les informations sur les constantes `mode_t` correspondant au troisième paramètre de `open` ?
@@ -67,7 +67,7 @@ Questions :
 ./cp_std <fichier1> <fichier2>
 ```
 
-Questions :
+**Questions :**
 
 1. Dans quel fichier `man` se trouvent les informations sur les valeurs possibles correspondant au deuxième paramètre de `fopen` ?
 2. Que se passe-t-il si le deuxième fichier n'existe pas ?
@@ -89,3 +89,21 @@ dd if=/dev/zero of=/tmp/toto count=50000
     ./cp_sys <fichier1> <fichier2> <taille_buffer>
     ```
 3. Déterminer de manière expérimentale la taille de buffer permettant de minimiser le temps de copie de ce fichier volumineux.
+
+**Questions :**
+
+1. Donner sous forme de tableau le résultat de vos expérimentations :
+
+    | Temps `cp_std` (ms) |
+    |:----------------:|
+    | ... |
+
+    |Taille du buffer (octets) | Temps `cp_sys` (ms) |
+    |:----------------:|:--------------:|
+    |  1               |  ...             |
+    |  256             | ...          |
+    |  512             |  ...          |
+    |  1024             |  ...            |
+    |  ...             |  ...             |
+
+2. Quelle est la taille du buffer utilisé par les fonctions de bibliothèque ?
