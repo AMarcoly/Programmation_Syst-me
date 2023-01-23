@@ -25,7 +25,7 @@ En programmation système, il existe deux types de primitives pour manipuler les
 
 Pour savoir quels fichiers `.h` inclure et avoir des informations détaillées sur le rôle et l'utilisation de ces fonctions utiliser la commande `man` :
 
-```properties
+```sh
 man fopen
 man 2 open    # car `man open` affiche l'aide sur la commande système `open`
 ```
@@ -78,7 +78,7 @@ Questions :
 
 Créer un fichier de grande taille en utilisant (par exemple) la commande :
 
-```properties
+```sh
 dd if=/dev/zero of=/tmp/toto count=50000
 ```
 
