@@ -79,7 +79,7 @@ Tester votre programme en vérifiant que les deux fichiers sont identiques (comm
 Créer un fichier de grande taille en utilisant (par exemple) la commande :
 
 ```sh
-dd if=/dev/zero of=/tmp/toto count=50000
+dd if=/dev/urandom of=bigfile count=50000
 ```
 
 1. A l'aide de la commande `time`,  comparer les temps de copie de ce fichier avec `cp_sys` et `cp_std`.
@@ -101,9 +101,49 @@ dd if=/dev/zero of=/tmp/toto count=50000
     |Taille du buffer (octets) | Temps `cp_sys` (ms) |
     |:----------------:|:--------------:|
     |  1               |  ...             |
+    |  8             | ...          |
+    |  16             | ...          |
     |  256             | ...          |
     |  512             |  ...          |
     |  1024             |  ...            |
     |  ...             |  ...             |
 
 2. Quelle est la taille du buffer utilisé par les fonctions de bibliothèque ?
+
+## Exercice 4
+
+Écrire le programme `cp_rev` qui écrit, caractère par caractère,  le contenu du premier fichier dans le second, mais dans l'ordre inverse (le dernier octet est écrit en première position, l'avant dernier en deuxième position, etc.). Vous utiliserez les primitives système.
+
+Vérifier à l'aide de la commande `cmp` qu'un fichier inversé deux fois est bien identique à l'original.
+
+```sh
+./cp_rev <fichier1> <fichier2> 
+```
+
+**Questions :**
+
+1. Comment positionner la tête de lecture à la fin du fichier ?
+2. Comment faire « reculer » la tête de lecture ?
+2. Quelles sont les différentes possibilités pour connaître la taille d'un fichier ?
+
+## Exercice 5 
+
+Écrire les programmes `read_int` et `write_int` qui permettent, respectivement, de lire  et d'écrire un entier de type `off_t` (codé sur $`64`$ bits) à une position donnée dans un fichier passé en paramètre, à l'aide des primitives système.
+
+Le programme `read_int` affiche l'entier présent à la position `pos` du fichier. 
+
+Le programme `write_int` écrit dans un fichier existant le nombre décimal donné en troisième argument de la commande à la position `pos`. Si le fichier n'existe pas, il est créé avec les droits `0666`. Si `pos` dépasse la taille du fichier, le fichier sera complété avec des `0`.
+
+Tester vos programmes en vérifiant qu'un entier écrit avec `write_int` est correctement lu avec `read_int`. Vous pourrez vous aider de la commande `hexdump`  afin de visualiser le contenu de vos fichiers.
+
+```sh
+./read_int <fichier> <pos> 
+./write_int <fichier> <pos> <entier>
+```
+
+**Questions :**
+
+1. Que se passe-t-il si on essaie de lire à une position négative ?
+2. Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
+3. Comment faire pour afficher une erreur dans ce cas ?
+4. Que se passe-t-il si on écrit au delà de la fin du fichier ?
