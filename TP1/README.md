@@ -143,7 +143,7 @@ Tester vos programmes en vérifiant qu'un entier écrit avec `write_int` est cor
 
 **Questions :**
 
-1. Que se passe-t-il si on essaie de lire à une position négative ?
+1. Que se passe-t-il si on essaie de lire à une position de valeur négative ?
 2. Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
 3. Comment faire pour afficher une erreur dans ce cas ?
 4. Que se passe-t-il si on écrit au delà de la fin du fichier ?
