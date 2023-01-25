@@ -73,7 +73,7 @@ Cette commande va chercher sur la **remote** par défaut ("origin") les **commit
 De nouvelles ressources seront ajoutés au fur et à mesure par les enseignants sur le dépôt de référence depuis lequel vous avez forké votre dépôt.
 De manière à pouvoir les récupérer, vous pouvez ajouter une nouvelle remote à la configuration de votre dépôt local :
 ```sh
-git remote add upstream https://https://git.unistra.fr/l2s4p-progsys/PS
+git remote add upstream https://git.unistra.fr/l2s4p-progsys/PS
 ```
 *upstream* est le nom que l'on choisit ici de donner à cette nouvelle **remote** (on aurait pu choisir un autre nom).
 C'est en général comme cela que l'on appelle le dépôt de référence depuis lequel on a forké son dépôt.
