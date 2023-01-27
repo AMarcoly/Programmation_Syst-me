@@ -85,4 +85,3 @@ Pour récupérer les commits ajoutés par vos enseignants sur le dépôt de réf
 ```sh
 git pull upstream main
 ```
-*main* est ici le nom de la **branche** dans laquelle vous travaillez...

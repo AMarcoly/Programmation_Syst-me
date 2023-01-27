@@ -128,7 +128,7 @@ Vérifier à l'aide de la commande `cmp` qu'un fichier inversé deux fois est bi
 
 ## Exercice 5 
 
-Écrire les programmes `read_int` et `write_int` qui permettent, respectivement, de lire  et d'écrire un entier de type `off_t` (codé sur $`64`$ bits) à une position donnée dans un fichier passé en paramètre, à l'aide des primitives système.
+Écrire les programmes `read_int` et `write_int` qui permettent, respectivement, de lire  et d'écrire un entier de type `int64_t` (codé sur $`64`$ bits, faites un `#include <stdint.h>`) à une position donnée dans un fichier passé en paramètre, à l'aide des primitives système.
 
 Le programme `read_int` affiche l'entier présent à la position `pos` du fichier. 
 
