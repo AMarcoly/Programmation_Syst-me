@@ -1,3 +1,4 @@
+#MA
 # Séance 1 - Fichiers
 
 En programmation système, il existe deux types de primitives pour manipuler les fichiers :
