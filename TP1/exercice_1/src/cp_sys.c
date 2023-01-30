@@ -9,6 +9,7 @@
  * 
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -43,6 +44,12 @@ void cp_sys(const char *fichiersrc, const char *fichierdest ){
 
 int main(int argc, char * argv[]){
 
- 
+    //test du nombre d'arguments
+    if( argc != 3){
+        fprintf(stderr, "Erreur us : %s <source> <destination>\n",argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    
+    cp_sys(argv[1],argv[2]);
     return 0;
 }
