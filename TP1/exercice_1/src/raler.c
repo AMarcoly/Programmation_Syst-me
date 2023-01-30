@@ -4,9 +4,7 @@
 #include <stdnoreturn.h>
 #include <stdlib.h>
 
-//Prq je n'arrive pas a les enlever
-
-#define CHK(op) do { if ( (op) == -1) raler (1,#op);  } while(0)
+//Prq je n'arrive pas a les enlever (fichiers inclusions)
 
 
 noreturn void raler(int syserr,  const char *msg, ...){
