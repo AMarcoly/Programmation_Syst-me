@@ -33,7 +33,7 @@ void cp_sys(const char *fichiersrc, const char *fichierdest ){
     CHK( src = open(fichiersrc,O_RDONLY));
 
     //ouverture en ecriture seule, si le fichier n'existe pas on va le creer avec droits 0666
-    CHK(dest=open(fichierdest,O_WRONLY | O_CREAT ));
+    CHK(dest=open(fichierdest,O_WRONLY | O_CREAT , 0666));
 
     //boucle de lecture octet par octet
     while( (n = read(src,&c,1)) > 0 )
