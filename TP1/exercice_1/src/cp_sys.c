@@ -18,7 +18,12 @@
 
 #include "../include/raler.h"
 
-
+/**
+ * @brief Fonction qui prend en parametres deux noms de fichiers
+ * et recopie le contenu du premier dans le second octet par octet
+ * @param fichiersrc 
+ * @param fichierdest 
+ */
 void cp_sys(const char *fichiersrc, const char *fichierdest ){
     int src,dest;   //va recuperer les fd des fonctions open
     ssize_t n; 
@@ -50,6 +55,7 @@ int main(int argc, char * argv[]){
         exit(EXIT_FAILURE);
     }
     
+    //Appel de la fonction copie
     cp_sys(argv[1],argv[2]);
     return 0;
 }

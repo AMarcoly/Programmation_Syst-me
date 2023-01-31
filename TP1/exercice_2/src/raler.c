@@ -1,11 +1,4 @@
 #include "../include/raler.h"
-//#include <stdio.h>
-//#include <stdarg.h>
-//#include <stdnoreturn.h>
-//#include <stdlib.h>
-
-//Prq je n'arrive pas a les enlever (fichiers inclusions)
-
 
 noreturn void raler(int syserr,  const char *msg, ...){
     va_list ap;
