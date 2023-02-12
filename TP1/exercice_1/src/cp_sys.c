@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#define TAILLE_BUFFER 1024
+//#define TAILLE_BUFFER 1024
 
 #include "../include/raler.h"
 
@@ -31,7 +31,7 @@ void cp_sys(const char * fichier_src, const char * fichier_dest, const int taill
     //char caractere_lue;
     //ssize_t n;  // nombre de bits lues
 
-    char buffer[TAILLE_BUFFER];  //octets lus ne pas utiliser char * mais un tableau de taille max buff
+    char buffer[taille_buffer];  //octets lus ne pas utiliser char * mais un tableau de taille max buff
     ssize_t n;      //nbr octets lus
 
     //ouverture des fichiers source et destination
@@ -50,9 +50,10 @@ void cp_sys(const char * fichier_src, const char * fichier_dest, const int taill
    // CHK(n); //test si erreur lecture
 
     //version_2
+
     //Faut-il use adresse de buffer ou buffer directement?
-    while( (n=read(fd_src,buffer,taille_buffer)) > 0){
-        CHK(write(fd_dest,buffer,taille_buffer));
+    while( (n=read(fd_src,&buffer,taille_buffer)) > 0){
+        CHK(write(fd_dest,&buffer,taille_buffer));
     }
 
     CHK(n); //test si non erreur lecture
@@ -66,13 +67,13 @@ void cp_sys(const char * fichier_src, const char * fichier_dest, const int taill
 int main(const int argc , char * argv[]){
 
      //test du nombre d'arguments
-    if( argc != 3){
+    if( argc != 4){
         fprintf(stderr, "Erreur us : %s <source> <destination>\n",argv[0]);
         exit(EXIT_FAILURE);
     }
-
+    const int taille = atoi(argv[3]);
     //Appel fonction
-    cp_sys(argv[1], argv[2],TAILLE_BUFFER);
+    cp_sys(argv[1], argv[2],taille);
     
     exit(EXIT_SUCCESS);
 

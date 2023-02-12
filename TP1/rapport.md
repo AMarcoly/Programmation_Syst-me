@@ -37,12 +37,14 @@ le fichier sera donc protege.
 # Exercice 2
 
 # Question 1
-
+    Les informations sur fopen se trouve sur dans le man avec la commande "man fopen".
+    Il faut inclure l'en-tete: 
+        #include <stdio.h>
 
 # Question 2
-
+    Si le fichier n'existe pas il est cree automatiquement.
 # Question 3
-
+    La constante EOF 
 
 # Exercice 3
 Le temps d'exec avec cp_sys est :
@@ -63,3 +65,39 @@ sys	0m0,092s
 
 
 La fonction cd_std est beaucoup plus efficace que la fonction cp_sys
+
+| Temps `cp_std` (ms) |
+    |:----------------:|
+    | 504(ms)|
+
+    |Taille du buffer (octets) | Temps `cp_sys` (ms) |
+    |:----------------:|:--------------:|
+    |  1               |   17293        |
+    |  8               | 8981           |
+    |  16              |649             |
+    |  256             | 347            |
+    |  512             |  216           |
+    |  1024            |  144           |
+    |  4096            |  104           |
+
+# exercice 5
+
+# Question 1
+
+# 1 Que se passe-t-il si on essaie de lire à une position de valeur négative ?
+
+La fonction lseek nous renvoie l'erreur :
+    lseek(fd_fichier,pos,SEEK_SET)
+    Invalid argument
+car la position negative est un argument invalide et empeche donc le placement du curseur.
+
+# 2 Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
+
+    Le programme renvoie l'entier 0 ceci est du au fait qu'il n'y a pas de valeur a cet endroit donc
+    pour puvoir fonctionner il remplit jusqu'a position avec des zeros. Ceci nous empeche de voir s'il y a erreur ou pas.
+        "L'entier lu est 0"
+
+# 3 Comment faire pour afficher une erreur dans ce cas ?
+
+Pour pallier a ceci j'ai mis une condition pour que la position doit obligatoirement etre un nombre entre 0 et taille du fichier.
+Taille que j'ai recupere via la structure stbuf.
