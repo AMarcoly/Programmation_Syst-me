@@ -7,7 +7,7 @@ B_REP = bin/
 D_REP = doc/
 CC = gcc
 
-EXE = $(B_REP)cp_rev
+EXE = $(B_REP)read_int
 SRC = $(wildcard $(S_REP)*.c)
 OBJ = $(SRC:$(S_REP)%.c=$(O_REP)%.o)
 RM 	= rm
