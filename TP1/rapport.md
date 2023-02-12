@@ -82,22 +82,20 @@ La fonction cd_std est beaucoup plus efficace que la fonction cp_sys
 
 # exercice 5
 
-# Question 1
-
-# 1 Que se passe-t-il si on essaie de lire à une position de valeur négative ?
+# Question 1 Que se passe-t-il si on essaie de lire à une position de valeur négative ?
 
 La fonction lseek nous renvoie l'erreur :
     lseek(fd_fichier,pos,SEEK_SET)
     Invalid argument
 car la position negative est un argument invalide et empeche donc le placement du curseur.
 
-# 2 Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
+# Question 2 Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
 
     Le programme renvoie l'entier 0 ceci est du au fait qu'il n'y a pas de valeur a cet endroit donc
     pour puvoir fonctionner il remplit jusqu'a position avec des zeros. Ceci nous empeche de voir s'il y a erreur ou pas.
         "L'entier lu est 0"
 
-# 3 Comment faire pour afficher une erreur dans ce cas ?
+# Question 3 Comment faire pour afficher une erreur dans ce cas ?
 
 Pour pallier a ceci j'ai mis une condition pour que la position doit obligatoirement etre un nombre entre 0 et taille du fichier.
 Taille que j'ai recupere via la structure stbuf.
