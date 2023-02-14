@@ -48,5 +48,7 @@ void write_int(char * const fichiersrc,int64_t nbr, int pos){
     //ecriture caractere
     CHK(write(fd,&nbr, 8));
 
+    //fermeture fichier
+    CHK(close(fd));
 
 }
