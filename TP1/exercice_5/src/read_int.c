@@ -52,7 +52,7 @@ void read_int(const char * fichiersrc,int pos){
     if(stbuf.st_size < 8)
         printf("Pas assez d'octets\n");
     //lecture des octets
-    CHK(read(fd_fichier,&entier_a_lire,1));
+    CHK(read(fd_fichier,&entier_a_lire,8));
     //affichage de l'entier a cette position
     printf("L'entier lu est %ld\n",entier_a_lire);
 }
