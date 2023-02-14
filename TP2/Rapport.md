@@ -42,3 +42,4 @@ Les macros POSIX qui le permettent sont:
 
 
 # Exercice 2
+Faire boucle et recursion selon prof
