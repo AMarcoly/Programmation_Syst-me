@@ -35,14 +35,17 @@ int main(const int argc , char * argv[]){
     switch (pid) {
         case -1 : 
             raler(1,"fork");
+        break;
         case 0 :
             pid_fils = getpid();
             printf("Je suis le fils de PID %d et mon pere est le processus %d de PID \n",pid_fils,getppid());
             exit(pid_fils % 10);
+        break;
         default :
-        printf("Je suis le pere et mon PID est: %d\n",getpid());
-        wait(&raison);
-        printf("Le dernier numero du fils est %d\n",WSTOPSIG(raison));
+            wait(&raison);
+            printf("Je suis le pere et mon PID est: %d\n",getpid());
+            printf("Le dernier numero du fils est %d\n",WSTOPSIG(raison));
+        break;
         
         /*
         if(wait(&raison)==-1){
