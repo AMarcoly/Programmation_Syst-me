@@ -97,10 +97,10 @@ Exemple :
 
 ```sh 
 ls_rec PS/
-./TP1 
-./TP1/README.md
-./TP2
-./TP2/README.md
+PS/TP1 
+PS/TP1/README.md
+PS/TP2
+PS/TP2/README.md
 ```
 
 **Questions :**
