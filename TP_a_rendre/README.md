@@ -82,9 +82,7 @@ Vous devrez rendre votre travail avant le **lundi 13 mars 17h00**
 
 Un script de notation est mis à votre disposition dans ce dépôt. Celui-ci
 compile votre programme et l'exécute sur des jeux de tests. Il vous
-affiche la note (sur 4 points) qui servira de base à l'évaluation de
-votre rendu. N'hésitez pas à lire ces tests et le fichier de *log*
-généré : ils peuvent vous aider à mettre votre programme au point.
+affiche le nombre de tests passés avec succès, qui servira de base à l'évaluation de votre travail. N'hésitez pas à lire ces tests : ils peuvent vous aider à mettre votre programme au point.
 
 Ce TP à rendre est individuel. On rappelle que la copie ou le plagiat
 sont sévèrement sanctionnés.
