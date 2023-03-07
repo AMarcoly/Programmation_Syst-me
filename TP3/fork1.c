@@ -26,8 +26,7 @@ noreturn void raler(int syserr,  const char *msg, ...){
     exit(EXIT_FAILURE);
 }
 
-
-int main(const int argc , char * argv[]){
+void fork_1(){
     int raison;
     pid_t pid,pid_fils;
     //int v;
@@ -59,6 +58,10 @@ int main(const int argc , char * argv[]){
         }
         */
     }
+}
 
+int main(const int argc , char * argv[]){
+    
+    fork_1();
     exit(EXIT_SUCCESS);
 }
