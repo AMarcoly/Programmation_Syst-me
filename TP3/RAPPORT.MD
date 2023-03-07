@@ -1,4 +1,4 @@
-## Question 1
+## Exercice 1
 
 **Questions :**
 
@@ -10,4 +10,18 @@
 
 2. Pour que le fils devienne zombie on met une boucle infinie dans le père. while(1) 
 
-utiliser sleep pr etre sur que le pere attende.
+3. utiliser sleep pr etre sur que le pere attende.
+
+processus orphelin pas termine. zombie termine. Mettre un exit a la fin du fils. 
+si mettre exit il 
+
+##  Exercice 2
+
+# Question 1
+L'ordre d'affichage ne suit pas l'ordre de creation.
+# Question 2
+Ce qui est normal car l'ordonanceur lance les processus selon le quantum du systeme.
+Lorsque l'ordonanceur passe au processus fils 2 le processus 1 n'a pas eu le temps de finir et entre temps le processus 2 se termine. Et on revient au processus 1 qui se termine a son tour.
+
+
+"Si argument passe n'est pas un repertoire exit: pour projet. Pour executable faire "
