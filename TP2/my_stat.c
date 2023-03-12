@@ -45,7 +45,7 @@ void my_stat(const char * filename){
 
 	printf("UID : %d\n",st_buf.st_uid);//affichage uid 
 	printf("GID : %d\n",st_buf.st_gid); //affichage gid
-	printf("File size : %lld\n",st_buf.st_size); //taille du fichier
+	printf("File size : %ld\n",st_buf.st_size); //taille du fichier
 	if(S_ISREG(st_buf.st_mode)){
 		// si c un fichier ordinaire
 		printf("Type : regulier\n");
