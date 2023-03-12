@@ -206,11 +206,11 @@ rm -rf $TMP/noxbit
 # 2. Tester le comportement basique sur un unique répertoire
 #
 
-# annoncer "Un répertoire vide"
-# creer_arbo $TMP/files 0 0 0
-# run_prog 0 $TMP/files
-# test_file $DIRES 0
-# rm -rf $TMP/files $DIRES
+annoncer "Un répertoire vide"
+creer_arbo $TMP/files 0 0 0
+run_prog 0 $TMP/files
+test_file $DIRES 0
+rm -rf $TMP/files $DIRES
 
 annoncer "Un répertoire contenant un fichier non exe"
 creer_arbo $TMP/files 0 1 0

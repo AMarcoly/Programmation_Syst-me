@@ -50,7 +50,7 @@ int est_executable(const char * chemin){
  */
 int est_accessible(const char * chemin){
     if(!(access(chemin, F_OK|X_OK))){
-        raler("Accessibilite");    
+        raler("Non accessible");    
     }
     return 1;
 }
@@ -64,7 +64,7 @@ int est_accessible(const char * chemin){
 int est_un_repertoire(const char * chemin){
     struct stat st_buf;
     if(stat(chemin,&st_buf)==-1){
-        raler("repertoire");
+        raler("N'est pas un repertoire");
     }
     return S_ISDIR(st_buf.st_mode);
 }
@@ -98,7 +98,9 @@ int gestion_fichier(const char * chemin){
     char * args[] = {"file","--mime-type",(char *)chemin,NULL};
     pid_t pid = fork();
     switch(pid){
-        case -1 : raler("fork");
+        case -1 : 
+            perror("Erreur PID");
+            exit(EXIT_FAILURE);
         case 0  :
             {
                 dup2(fd,STDOUT_FILENO);
@@ -125,13 +127,21 @@ int gestion_fichier(const char * chemin){
 
 
 int exdir(const char * chemin){
-    int bit_temoin=1;
+    
     DIR * dir;
     struct dirent *dp;
     if((dir=opendir(chemin) )== NULL){
-        raler("inexistant");
+        raler("Repertoire inexistant");
     }
+    int bit_temoin=1;
+     //creation de repertoire recevant les fichiers resultats 
+    char Resultat[PATH_MAX];
+    sprintf(Resultat, "/tmp/%d", getuid());
     
+    if(mkdir(Resultat,0777) ==-1){
+        raler("Erreur sur creation Creation repertoire\n");
+    }
+
     while((dp=readdir(dir))!= NULL){
         //test repertoire vide
         if((strcmp(dp->d_name, ".") == 0) ||
@@ -145,16 +155,42 @@ int exdir(const char * chemin){
             raler("Taille depassee");
         }
         //test si repertoire ou fichier et traitement
-        if(est_un_repertoire(subpath)){
-            if(est_accessible(subpath)){
+        //version 2
+         struct stat st_buf;
+        // recuperation des donnees du repertoire
+        if(stat(subpath,&st_buf) == -1){
+            raler("stat");
+        }
+
+        if(S_ISDIR(st_buf.st_mode)){
+            if(access(subpath,R_OK|X_OK)){
                 bit_temoin = bit_temoin & exdir(subpath);
             }
         }
-        if(est_un_fichier(subpath)){
-            if(est_accessible(subpath)){
+        if(S_ISREG(st_buf.st_mode)){
+            if(access(subpath,R_OK|X_OK)){
                 bit_temoin = bit_temoin & gestion_fichier(subpath);
             }
         }
+        else{
+            bit_temoin=0;
+        }
+        //version 1
+       
+        // if(est_un_repertoire(subpath)){
+        //     if(est_accessible(subpath) && est_executable(subpath)){
+        //         bit_temoin = bit_temoin & exdir(subpath);
+        //     }
+        // }
+        // if(est_un_fichier(subpath)){
+        //     if(est_accessible(subpath)){
+        //         bit_temoin = bit_temoin & gestion_fichier(subpath);
+        //     }
+        // }
+        
+
+        
+        
     }//fin du while
 
     //fermeture repertoire
@@ -178,24 +214,12 @@ int main(int argc,char * argv[]){
         exit(EXIT_FAILURE);
     }
 
-    //creation de repertoire recevant les fichiers resultats 
-    char Resultat[PATH_MAX];
-    sprintf(Resultat, "/tmp/%d", getuid());
-    
-    if(mkdir(Resultat,0777) ==-1){
-        raler("Creation repertoire\n");
-    }
-    const char * chemin = argv[1];
-    
-    if(!est_accessible(chemin)){
-        raler("chemin non accessible");
+    if(access(argv[1],X_OK) != 0){
+        raler("Repertoire non accessible en execution.");
     }
 
-    if(!est_un_repertoire(chemin)){
-        raler("Erreur chemin");
-    }
-
-    return exdir(argv[1]) ? 0 : 1;
+    exdir(argv[1]);
+    return 0;
 }
 // Modalités de rendu : 
 // - dépôt sur Moodle (dans le dépôt qui concerne votre groupe)
