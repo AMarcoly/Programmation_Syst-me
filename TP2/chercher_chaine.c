@@ -73,11 +73,6 @@ void chercher_chaine(char * pathname, char * chaine){
                 if(strstr(buf,chaine)!=NULL){
                     printf("%s\n",subpath);
                 }
-                // //char * sous_chaine=buf;
-                // while((sous_chaine=strstr(sous_chaine,chaine))){
-                //     printf("%s\n",subpath);
-                //     sous_chaine += taille;
-                // }
             }
             //fermeture
             CHK(close(file_descriptor));
