@@ -67,12 +67,12 @@ void exdir(const char * chemin){
             //cas fichier regulier
             if(access(subpath,R_OK|X_OK)== 0){
                 //
-                char * fichier_de_sortie = malloc(PATH_MAX+strlen(dp->d_name) + 3);
+                char * fichier_de_sortie = malloc(PATH_MAX+strlen(dp->d_name));
                 if(fichier_de_sortie==NULL){
                     raler("Erreur Malloc");
                 }  
 
-                snprintf(fichier_de_sortie, PATH_MAX + strlen(dp->d_name) + 2, "/tmp/%d/%s", getuid(), dp->d_name);
+                snprintf(fichier_de_sortie, PATH_MAX + strlen(dp->d_name), "/tmp/%d/%s", getuid(), dp->d_name);
                 if(strlen(fichier_de_sortie)>=PATH_MAX){exit(1);}
                 
                 int fd = open(fichier_de_sortie,O_WRONLY|O_CREAT|O_TRUNC,0644);
