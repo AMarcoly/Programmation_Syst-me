@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -68,24 +69,73 @@ int est_un_repertoire(const char * chemin){
     return S_ISDIR(st_buf.st_mode);
 }
 
+int est_un_fichier(const char * chemin){
+    struct stat st_buf;
+    if (stat(chemin,&st_buf) == -1) {
+        raler("Test fichier echoue");
+    }
+    return S_ISREG(st_buf.st_mode);
+}
+
+int gestion_fichier(const char * chemin){
+    //tester si fichier executable
+    if(!est_executable(chemin)){
+        raler("Fichier non executable");
+    }
+
+    char sous_chemin[PATH_MAX];
+    if((snprintf(sous_chemin, sizeof(sous_chemin),"%s/%d/%s",TMP_repertoire,getuid(),chemin) ) >= PATH_MAX )
+    {
+        raler("Chemin trop long");
+    }
+
+    //ouverture fichier
+    int fd = open(sous_chemin,O_WRONLY|O_CREAT|O_TRUNC,0666);
+    if(fd==-1){
+        raler("Erreur ouverture fichier ");
+    }
+
+    char * args[] = {"file","--mime-type",(char *)chemin,NULL};
+    pid_t pid = fork();
+    switch(pid){
+        case -1 : raler("fork");
+        case 0  :
+            {
+                dup2(fd,STDOUT_FILENO);
+                close(fd);
+                execvp(args[0],args);
+                perror(args[0]);
+                exit(EXIT_FAILURE);
+            }
+        default:{
+            int status;
+            if(waitpid(pid, &status, 0) == -1){
+                raler("Erreur processus pere");
+            }
+
+            if(!WIFEXITED(status) || WEXITSTATUS(status) != 0 ){
+                fprintf(stderr, "Echec de traitement fichier %s\n",chemin);
+            }
+            return 1;
+        }       
+
+    }
+    // return 0;
+}
+
 
 int exdir(const char * chemin){
+    int bit_temoin=1;
     DIR * dir;
     struct dirent *dp;
-    dir=opendir(chemin);
-    if(!dir){
-        perror(chemin);
-        return 0;
+    if((dir=opendir(chemin) )== NULL){
+        raler("inexistant");
     }
-    if( (dp=readdir(dir)) == NULL){
-        perror("Repertoire vide");
-        return 0;
-    }
-
+    
     while((dp=readdir(dir))!= NULL){
+        //test repertoire vide
         if((strcmp(dp->d_name, ".") == 0) ||
-        (strcmp(dp->d_name, "..") == 0) ||
-        (fnmatch(".*",dp ->d_name,0)==0)){
+        (strcmp(dp->d_name, "..") == 0)){
             continue;
         }
         // creation nouvelle chaine pour aller dans le sous-repertoire
@@ -94,14 +144,24 @@ int exdir(const char * chemin){
         if((snprintf(subpath,sizeof(subpath),"%s/%s",chemin,dp->d_name) ) > PATH_MAX){
             raler("Taille depassee");
         }
-        struct stat st_buf;
-        // recuperation des donnees du repertoire
-        if(stat(subpath,&st_buf) == -1){
-            raler("Stat");
+        //test si repertoire ou fichier et traitement
+        if(est_un_repertoire(subpath)){
+            if(est_accessible(subpath)){
+                bit_temoin = bit_temoin & exdir(subpath);
+            }
         }
+        if(est_un_fichier(subpath)){
+            if(est_accessible(subpath)){
+                bit_temoin = bit_temoin & gestion_fichier(subpath);
+            }
+        }
+    }//fin du while
 
+    //fermeture repertoire
+    if(closedir(dir) ==-1){
+        raler("Fermeture repertoire");
     }
-    return 0;
+    return bit_temoin;
 }
 
 /**
@@ -122,14 +182,20 @@ int main(int argc,char * argv[]){
     char Resultat[PATH_MAX];
     sprintf(Resultat, "/tmp/%d", getuid());
     
-    if(mkdir(TMP_repertoire,07000)==-1){
+    if(mkdir(Resultat,0777) ==-1){
         raler("Creation repertoire\n");
     }
-
-    exdir(argv[1]);
-
+    const char * chemin = argv[1];
     
-    return 0;
+    if(!est_accessible(chemin)){
+        raler("chemin non accessible");
+    }
+
+    if(!est_un_repertoire(chemin)){
+        raler("Erreur chemin");
+    }
+
+    return exdir(argv[1]) ? 0 : 1;
 }
 // Modalités de rendu : 
 // - dépôt sur Moodle (dans le dépôt qui concerne votre groupe)
