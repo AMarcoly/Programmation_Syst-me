@@ -98,4 +98,7 @@ car la position negative est un argument invalide et empeche donc le placement d
 # Question 3 Comment faire pour afficher une erreur dans ce cas ?
 
 Pour pallier a ceci j'ai mis une condition pour que la position doit obligatoirement etre un nombre entre 0 et taille du fichier.
-Taille que j'ai recupere via la structure stbuf.
+
+# Question 4
+
+Si on écrit au delà de la fin du fichier. Des zeros sont ajoutés jusqu'à la position où l'on souhaite écrire.
