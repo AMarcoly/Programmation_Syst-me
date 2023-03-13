@@ -1,5 +1,11 @@
 /**
- * @brief Fichier exdir.c
+ * @file exdir.c
+ * @author Marcoly Antoine (marcoly.antoine@etu.unistra.fr)
+ * @brief 
+ * @version 0.1
+ * @date 2023-03-13
+ * 
+ * @copyright Copyright (c) 2023
  * 
  */
 #include <fcntl.h>
@@ -27,6 +33,13 @@ void raler(const char * msg){
     exit(EXIT_FAILURE);
 }
 
+
+/**
+ * @brief Fonction qui va effectuer le traitement demandé. Il prend en paams
+* un chemin de repertoire et ecrit dont un repertoire créé le résultat du traitement.
+ * 
+ * @param chemin 
+ */
 void exdir(const char * chemin){
     
     DIR * dir;
@@ -59,6 +72,7 @@ void exdir(const char * chemin){
         if(strlen(subpath)>=PATH_MAX){exit(1);}
 
         if(dp->d_type == DT_DIR){
+            // cas repertoire
             if(access(subpath,R_OK|X_OK)== -1){
                 continue;    
             }
@@ -123,7 +137,7 @@ int main(int argc,char * argv[]){
     if(access(argv[1],X_OK) != 0){
         raler("Repertoire non accessible en execution.");
     }
-
+    // Appel de fonction
     exdir(argv[1]);
     return 0;
 }
@@ -133,5 +147,3 @@ int main(int argc,char * argv[]){
 
 // # Date limite de rendu : 
 // - lundi 13 mars 17h00
-
- 
