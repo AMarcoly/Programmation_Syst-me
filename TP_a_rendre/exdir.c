@@ -85,6 +85,8 @@ void exdir(const char * chemin){
                     raler("fork");
                 }
                 if(pid == 0){
+                    dup2(fd,STDOUT_FILENO);
+                    close(fd);
                     if(execvp(args[0],args)== -1){raler("execvp");}
                     if(close(fd)==-1){raler("close");}
                     free(fichier_de_sortie);
