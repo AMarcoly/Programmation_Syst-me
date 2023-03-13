@@ -270,11 +270,11 @@ rm -rf $TMP/files $DIRES
 # 4. Tester le comportement sur une arborescence de fichiers
 #
 
-# annoncer "Une hiérarchie avec un nom très long"
-# creer_arbo_long 20
-# run_prog 1 $TMP/files
-# test_file $DIRES 1
-# test_stderr $ERR
+#annoncer "Une hiérarchie avec un nom très long"
+#creer_arbo_long 20
+#run_prog 1 $TMP/files
+#test_file $DIRES 1
+#test_stderr $ERR
 
 annoncer "Test avec valgrind"
 VALG="valgrind --leak-check=full --error-exitcode=100 $PROG $TMP/files"
