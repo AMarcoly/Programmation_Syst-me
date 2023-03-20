@@ -73,10 +73,10 @@ void raler(const char * msg){
 }
 
 
-int main(int argc, char * argv[]){
-    if(argc<1){
-        exit(EXIT_FAILURE);
-    }
+int main(){
+    // if(argc<1){
+    //     exit(EXIT_FAILURE);
+    // }
     pipe_a();
     exit(EXIT_SUCCESS);
 }

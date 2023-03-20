@@ -1,4 +1,4 @@
-all : pip_a pip_b pip_c pip_red1 pip_red2 pip_red3
+all : pip_a pip_b pip_c pip_red1a pip_red1b pip_red1c pip_red2 
 CC = gcc -g
 CFLAGS = -Wall -Wextra
 LDFLAGS = -lm
@@ -17,13 +17,17 @@ pip_c : pip_c.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	rm -r *.o
 
-pip_red1 : pip_red1.o
+pip_red1a : pip_red1a.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	rm -r *.o
-pip_red2 : pip_red2
+pip_red1b : pip_red1b.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	rm -r *.o
-pip_red3 : pip_red3
+pip_red1c : pip_red1c.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	rm -r *.o
+
+pip_red2 : pip_red2.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	rm -r *.o
 
@@ -38,9 +42,10 @@ cleanExec :
 	rm pip_a
 	rm pip_b
 	rm pip_c
-	rm pip_red1
+	rm pip_red1a
+	rm pip_red1b
+	rm pip_red1c
 	rm pip_red2
-	rm pip_red3
 
 cleantxt :
 	rm *.txt

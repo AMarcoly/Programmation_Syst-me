@@ -9,6 +9,7 @@
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
 #define CHK2(op) do { if ( (op) == NULL) raler (#op);  } while(0)
 
+
 /**
  * @brief Fonction raler qui va s'occuper d'afficher les erreurs sur la sortie erreur standard
  * 
@@ -19,7 +20,11 @@ void raler(const char * msg){
     exit(EXIT_FAILURE);
 }
 
-void pip_red1(){
+/**
+ * @brief Fils execute ls et le pere wc
+ * 
+ */
+void pip_red2(){
     // creation pipe
     int fd[2];
 
@@ -35,26 +40,28 @@ void pip_red1(){
     switch (pid) {
         case -1 : raler("fork");
         case 0 :
-            //fermeture ecriture
+            //fermeture lecture car on va ecrire
+            CHK(close(fd[0]));
+            dup2(fd[1], STDOUT_FILENO);
             CHK(close(fd[1]));
-            
-            dup2(fd[0], STDIN_FILENO);
-            close(fd[0]);
-            execlp("wc", "wc","-l",NULL);
+            execlp("ls", "ls","-l",NULL);
+            exit(0);
     }
 
     //le pere
-    //fermeture en lecture
-    close(fd[0]);
-    dup2(fd[1], STDOUT_FILENO);
-    close(fd[1]);
-    execlp("ls", "ls","-l",NULL);
+    //fermeture en ecriture
+    wait(NULL);
+    CHK(close(fd[1]));
+    dup2(fd[0], STDIN_FILENO);
+    CHK(close(fd[0]));
+    execlp("wc", "wc","-l",NULL);
+
 }
 
 
-int main(int argc, char *argv[]){
+int main(void){
 
-    pip_red1();
+    pip_red2();
     exit(EXIT_SUCCESS);
 }
 
