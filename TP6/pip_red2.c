@@ -68,11 +68,12 @@ void pip_red2(char * arguments){
         CHK(close(tube12[0]));
         CHK(close(tube23[1]));
         
-        if(arguments == NULL)
+        if(arguments == NULL){
             execlp("grep","grep","^marcolyantoine",NULL);
-        else 
-            
+        }
+        else{
             execlp("grep","grep",strcat("^",(char *)arguments),NULL);
+        }     
         exit(EXIT_SUCCESS);
     }
 
