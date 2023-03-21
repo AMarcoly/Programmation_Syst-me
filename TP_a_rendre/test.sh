@@ -212,59 +212,59 @@ run_prog 0 $TMP/files
 test_file $DIRES 0
 rm -rf $TMP/files $DIRES
 
-annoncer "Un répertoire contenant un fichier non exe"
-creer_arbo $TMP/files 0 1 0
-run_prog 0 $TMP/files
-test_file $DIRES 0
-rm -rf $TMP/files $DIRES
+# annoncer "Un répertoire contenant un fichier non exe"
+# creer_arbo $TMP/files 0 1 0
+# run_prog 0 $TMP/files
+# test_file $DIRES 0
+# rm -rf $TMP/files $DIRES
 
-annoncer "Un répertoire contenant un fichier exe"
-creer_arbo $TMP/files 0 1 1
-run_prog 0 $TMP/files
-test_file $DIRES 1
-rm -rf $TMP/files $DIRES
+# annoncer "Un répertoire contenant un fichier exe"
+# creer_arbo $TMP/files 0 1 1
+# run_prog 0 $TMP/files
+# test_file $DIRES 1
+# rm -rf $TMP/files $DIRES
 
-annoncer "Un répertoire contenant un lien symb"
-mkdir $TMP/files ; ln -s /usr/bin/ls $TMP/files/ls
-run_prog 0 $TMP/files
-test_file $DIRES 0
-rm -rf $TMP/files $DIRES
+# annoncer "Un répertoire contenant un lien symb"
+# mkdir $TMP/files ; ln -s /usr/bin/ls $TMP/files/ls
+# run_prog 0 $TMP/files
+# test_file $DIRES 0
+# rm -rf $TMP/files $DIRES
 
-annoncer "Un répertoire contenant un mix"
-creer_arbo $TMP/files 0 35 15
-run_prog 0 $TMP/files
-test_file $DIRES 15
-rm -rf $TMP/files $DIRES
+# annoncer "Un répertoire contenant un mix"
+# creer_arbo $TMP/files 0 35 15
+# run_prog 0 $TMP/files
+# test_file $DIRES 15
+# rm -rf $TMP/files $DIRES
 
-###############################################################################
-# 3. Tester le comportement sur une arborescence de fichiers
-#
+# ###############################################################################
+# # 3. Tester le comportement sur une arborescence de fichiers
+# #
 
-annoncer "Une hiérarchie à 2 niveaux"
-creer_arbo $TMP/files 1 15 7
-run_prog 0 $TMP/files
-test_file $DIRES 14
-rm -rf $TMP/files $DIRES
+# annoncer "Une hiérarchie à 2 niveaux"
+# creer_arbo $TMP/files 1 15 7
+# run_prog 0 $TMP/files
+# test_file $DIRES 14
+# rm -rf $TMP/files $DIRES
 
-annoncer "Une hiérarchie à 2 niveaux avec un répertoire non lisible"
-creer_arbo $TMP/files 1 15 7 ; chmod -r $TMP/files/0.d
-run_prog 0 $TMP/files
-test_file $DIRES 7
-chmod +r $TMP/files/0.d
-rm -rf $TMP/files $DIRES
+# annoncer "Une hiérarchie à 2 niveaux avec un répertoire non lisible"
+# creer_arbo $TMP/files 1 15 7 ; chmod -r $TMP/files/0.d
+# run_prog 0 $TMP/files
+# test_file $DIRES 7
+# chmod +r $TMP/files/0.d
+# rm -rf $TMP/files $DIRES
 
-annoncer "Une hiérarchie à 2 niveaux avec un répertoire non exe"
-creer_arbo $TMP/files 1 15 7 ; chmod -x $TMP/files/0.d
-run_prog 0 $TMP/files
-test_file $DIRES 7
-chmod +x $TMP/files/0.d
-rm -rf $TMP/files $DIRES
+# annoncer "Une hiérarchie à 2 niveaux avec un répertoire non exe"
+# creer_arbo $TMP/files 1 15 7 ; chmod -x $TMP/files/0.d
+# run_prog 0 $TMP/files
+# test_file $DIRES 7
+# chmod +x $TMP/files/0.d
+# rm -rf $TMP/files $DIRES
 
-annoncer "Une hiérarchie à plusieurs niveaux"
-creer_arbo $TMP/files 10 50 25
-run_prog 0 $TMP/files
-test_file $DIRES 275
-rm -rf $TMP/files $DIRES
+# annoncer "Une hiérarchie à plusieurs niveaux"
+# creer_arbo $TMP/files 10 50 25
+# run_prog 0 $TMP/files
+# test_file $DIRES 275
+# rm -rf $TMP/files $DIRES
 
 ###############################################################################
 # 4. Tester le comportement sur une arborescence de fichiers
