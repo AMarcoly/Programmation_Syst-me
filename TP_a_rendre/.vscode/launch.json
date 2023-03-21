@@ -9,9 +9,9 @@
         ""
       ],
       "stopAtEntry": false,
-      "cwd": "/adhome/marcoly.antoine/Bureau/ps-personnel",
+      "cwd": "/adhome/m/ma/marcoly.antoine/Bureau/ps-personnel/TP_a_rendre",
       "environment": [],
-      "program": "/adhome/marcoly.antoine/Bureau/ps-personnel/build/Debug/outDebug",
+      "program": "/adhome/m/ma/marcoly.antoine/Bureau/ps-personnel/TP_a_rendre/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "/usr/bin/gdb",
