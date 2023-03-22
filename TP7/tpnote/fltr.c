@@ -56,11 +56,11 @@ int main (int argc, char * argv [])
         CHK(close(tube12[0]));
         CHK(entree=open(argv[1],O_RDONLY));
 
-        dup2(entree, STDIN_FILENO);
-        dup2(tube12[1],STDOUT_FILENO);
+        CHK(dup2(entree, STDIN_FILENO));
+        CHK(dup2(tube12[1],STDOUT_FILENO));
 
-        close(entree);
-        close(tube12[1]);
+        CHK(close(entree));
+        CHK(close(tube12[1]));
 
         CHK(execlp("tr","tr",".#","01",NULL));
         //exit(0);
