@@ -28,7 +28,7 @@ int main (int argc, char * argv [])
       argv[3] : nom du fichier sortie
     */
 
-    /* à vous d'écrire le buffte */
+    /* à vous d'écrire le reste */
 
     // declaration des tubes
     int tube12[2];
