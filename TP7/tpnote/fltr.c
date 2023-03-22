@@ -113,8 +113,8 @@ int main (int argc, char * argv [])
             
 
             //dup 
-            dup2(tube23[0],STDIN_FILENO);
-            dup2(sortie,STDOUT_FILENO);
+            CHK(dup2(tube23[0],STDIN_FILENO));
+            CHK(dup2(sortie,STDOUT_FILENO));
             
 
             //close
