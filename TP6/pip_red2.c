@@ -4,7 +4,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
-
+//#include <u.h>
+//#include <libc.h>
 
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
 #define CHK2(op) do { if ( (op) == NULL) raler (#op);  } while(0)
@@ -68,11 +69,14 @@ void pip_red2(char * arguments){
         CHK(close(tube12[0]));
         CHK(close(tube23[1]));
         
-        if(arguments == NULL)
+        if(arguments == NULL){
             execlp("grep","grep","^marcolyantoine",NULL);
-        else 
-            
+        }
+        else{
             execlp("grep","grep",strcat("^",(char *)arguments),NULL);
+        }
+            
+            
         exit(EXIT_SUCCESS);
     }
 
