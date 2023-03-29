@@ -64,6 +64,7 @@ int main (int argc, char * argv [])
 
         CHK(execlp("tr","tr",".#","01",NULL));
         //exit(0);
+        exit(EXIT_FAILURE);
     }
 
     CHK(pipe(tube23));
@@ -123,6 +124,7 @@ int main (int argc, char * argv [])
 
             if(execlp("cat","cat","-n",NULL) == -1) raler("execlp");
             //exit(0);
+        exit(EXIT_FAILURE);
     }
 
 

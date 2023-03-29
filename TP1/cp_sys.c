@@ -77,7 +77,7 @@ int main(const int argc , char * argv[]){
 
      //test du nombre d'arguments
     if( argc != 4){
-        fprintf(stderr, "Erreur us : %s <source> <destination>\n",argv[0]);
+        fprintf(stderr, "Erreur us : %s <source> <destination> <taille_buffer>\n",argv[0]);
         exit(EXIT_FAILURE);
     }
     const int taille = atoi(argv[3]);
@@ -93,7 +93,7 @@ int main(const int argc , char * argv[]){
 void cp_sys(const char *fichiersrc, const char *fichierdest){
     int src,dest;   //va recuperer les fd des fonctions open
     ssize_t n; 
-    char c; //caractere lire octet par octet
+    char c; //caractere : lire octet par octet
 
     //ouverture en lecture seule du premier fichier
     CHK( src = open(fichiersrc,O_RDONLY));

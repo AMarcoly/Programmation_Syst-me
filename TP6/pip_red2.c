@@ -74,13 +74,8 @@ void pip_red2(char * arguments){
         }
         else{
             execlp("grep","grep",strcat("^",(char *)arguments),NULL);
-<<<<<<< HEAD
+
         }
-            
-            
-=======
-        }     
->>>>>>> d1e369ae84462b1c372c3db1f2dddca188ef36e7
         exit(EXIT_SUCCESS);
     }
 

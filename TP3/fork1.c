@@ -60,7 +60,7 @@ void fork_1(){
     }
 }
 
-int main(const int argc , char * argv[]){
+int main(void){
     
     fork_1();
     exit(EXIT_SUCCESS);

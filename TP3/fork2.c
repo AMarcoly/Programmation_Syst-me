@@ -51,7 +51,7 @@ int fork_2(int n){
     }
     exit(EXIT_SUCCESS);
 }
-int main(const int argc , char * argv[]){
+int main(void){
     
     fork_2(5);
     exit(EXIT_SUCCESS);
