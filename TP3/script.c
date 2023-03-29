@@ -52,8 +52,9 @@ void script(const char * username){
 		}
 
 	// pere
-	CHK(waitpid(pid1,&status1,0)); // attendre fils 1 se termine
-
+	CHK(waitpid(pid1,&status1,0)); // attendre fils 1 se termine de maniere a gerer le ;
+	
+	// fils 2 : fork
 	CHK(pid2=fork());
 
 	switch(pid2){
@@ -72,13 +73,18 @@ void script(const char * username){
 			CHK(close(fd));
 			CHK(close(fd_null));
 
-			// executer 
-			CHK(execlp("grep","grep",username,NULL));
+			// // executer 
+			char subpath[256];
+			char * tilde = "^";
+			snprintf(subpath,sizeof(subpath),"%s%s",tilde,(char*)username);
+
+			CHK(execlp("grep","grep",subpath,NULL));
 	}
 	
 	// attendre cette execution et si reussit alors echo
 	CHK(waitpid(pid2,&status2,0));
 
+	// gestion du && , le fils 3 ne s'execute que si le fils 2 a reussi
 	if(WIFEXITED(status2) && WEXITSTATUS(status2) == 0){
 		CHK(pid3=fork());
 		switch (pid3){
@@ -91,6 +97,8 @@ void script(const char * username){
 		CHK(waitpid(pid3,&status3,0));
 	}
 
+	CHK(close(fd));
+
 }
 
 
@@ -99,7 +107,7 @@ void script(const char * username){
 int main(int argc, char * argv[]){
 	//test si bon nombre d'arguments
     if(argc != 2){
-        fprintf(stderr, "Erreur us : %s <source> <nom_user> \n",argv[0]);
+        fprintf(stderr, "Erreur us : %s <source> \n",argv[0]);
         exit(EXIT_FAILURE);
     }
     

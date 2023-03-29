@@ -40,7 +40,7 @@ void fork3(const char * pathname){
 
 	// ouverture du fichier en lecture
 	CHK(file_descriptor= open(pathname,O_RDONLY));
-	CHK(file_d_sortie = open("sortie.txt",O_WRONLY|O_CREAT|O_APPEND,0666));
+	CHK(file_d_sortie = open("sortie.txt",O_WRONLY|O_CREAT|O_TRUNC,0666));
 
 	// Question 1 redirection vers fichier
 	dup2(file_d_sortie,STDOUT_FILENO);
