@@ -20,11 +20,14 @@ void raler(const char * msg){
 
 
 /**
- * Écrivez un programme script.c équivalent au script shell suivant, qui prend en argument un nom d’utilisateur :
+ * Écrivez un programme script.c équivalent au script shell suivant, 
+ * qui prend en argument un nom d’utilisateur :
  * ps eaux > toto ; grep "^$1 " < toto > /dev/null && echo "$1 est connecté"
  * Votre programme devra :
- * réaliser effectivement les exécutions de ps et grep en utilisant la primitive execlp ;
- * mettre en place les redirections des entrées/sorties nécessaires grâce à la primitive dup (ou dup2) ;
+ * réaliser effectivement les exécutions de ps et grep 
+ * en utilisant la primitive execlp ;
+ * mettre en place les redirections des entrées/sorties 
+ * nécessaires grâce à la primitive dup (ou dup2) ;
  * réaliser l’affichage final avec la primitive write.
 */
 
