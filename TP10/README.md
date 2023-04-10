@@ -29,7 +29,7 @@ Objectifs de ce TP :
 
 Le processus père s'endort pendant 10 secondes puis prévient le fils qu’il doit s’arrêter en lui envoyant le signal `SIGUSR1`. Lorsque le processus fils reçoit l’ordre du père, il affiche un message et s’arrête effectivement, provoquant alors la terminaison du père. 
 
-Vous utiliserez la primitive `alarm` pour tout ce qui est temporisation.
+Vous utiliserez la primitive `alarm` pour la temporisation.
 
 **Questions:**
 - pourquoi faut-il faire appel à `sigaction` avant l'appel à `fork`?
