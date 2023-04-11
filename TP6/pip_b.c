@@ -32,7 +32,7 @@ void pipe_b(){
     // faire pipe avant fork
     CHK(pipe(tube));
 
-    pid = fork();
+    CHK(pid = fork());
 
     switch(pid){
     case -1: raler("fork");
@@ -45,7 +45,7 @@ void pipe_b(){
     }
 
     // pere 
-    wait(NULL);
+    CHK(wait(NULL));
     CHK(close(tube[1]));
     CHK(read(tube[0], msg, 256));
     CHK(close(tube[0]));

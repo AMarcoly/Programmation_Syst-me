@@ -62,10 +62,10 @@ void pip_c(void){
 
     // pere 
     CHK(close(tube[0]));
-    waitpid(pid_1,&status_1,0);
-    waitpid(pid_2,&status_2,0);
-    printf("Je suis le père et mes fils se sont terminés avec les codes :  %d et %d\n", status_1, status_2);
     CHK(close(tube[1]));
+    CHK(waitpid(pid_1,&status_1,0));
+    CHK(waitpid(pid_2,&status_2,0));
+    printf("Je suis le père et mes fils se sont terminés avec les codes :  %d et %d\n", status_1, status_2);
     exit(EXIT_SUCCESS);
 }
 

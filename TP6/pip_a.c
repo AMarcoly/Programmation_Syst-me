@@ -68,7 +68,7 @@ void raler(const char * msg){
     CHK(close(fd[0])); // fermeture extremite en ecri
     CHK(write(fd[1], chaine,strlen(chaine)));
     CHK(close(fd[1]));
-    wait(NULL);
+    CHK(wait(NULL));
 
 }
 
