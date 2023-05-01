@@ -2,10 +2,8 @@
 #include <stdarg.h>
 #include <stdnoreturn.h>
 #include <stdlib.h>
-#include <sys/types.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
@@ -31,7 +29,7 @@ int fork_2(int n){
     pid_t pid,pid_fils;
     int status;
 
-    //lancer les 5 processus fils
+    //lancer les n processus fils
     for(i=0; i<n;i++){
         pid= fork();
 
@@ -51,8 +49,11 @@ int fork_2(int n){
     }
     exit(EXIT_SUCCESS);
 }
-int main(void){
-    
-    fork_2(5);
+int main(int argc, char * argv[]){
+    if(argc != 2){
+        fprintf(stderr,"Erreur %s nombre de parametres <nbr_processus>\n",argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    fork_2(atoi(argv[1]));
     exit(EXIT_SUCCESS);
 }
