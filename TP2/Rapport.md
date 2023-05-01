@@ -6,7 +6,7 @@
         #include <unistd.h>
 
 
-2. L'attribut qui stocke les permissions est le st_mode . On peut le récupérer via les opérations bit à bit avec (S_IRWXU|S_IRWXG|S_IRWXO)
+2. L'attribut qui stocke les permissions est le st_mode . On peut le récupérer via les opérations bit à bit avec (S_IRWXU|S_IRWXG|S_IRWXO) et la valeur st_mode dans la structure stat.
 
 3. Les permissions sont renvoyes sur la base de 3 chiffres en octal:
         le premier octal contient les permissions de l'utilisateur,le deuxieme celles du groupe,le dernier celles des autres.
@@ -14,7 +14,7 @@
         6 : acces en lecture/ecriture
         5 : acces en ecriture/execution
         4 : acces en lecture
-        3 : acces lecture/ecriture
+        3 : acces execution/ecriture
         2 : acces ecriture
         1 : acces execution
 
@@ -28,7 +28,7 @@
     S_ISSOCK(m)
 
 
- ## Exercice 2
+## Exercice 2
 
 1. On peut filtrer ces noms de fichiers avec la fonction fnmatch.
 
