@@ -35,16 +35,16 @@
 2. Quelles sont les constantes POSIX permettant d'accéder aux différents bits de st_mode ?
 
  Les constantes POSIX sont : 
-	S_ISDIR
-	S_IRUSR
-	S_IWUSR
-	S_IXUSR
-	S_IRGRP
-	S_IWGRP
-	S_IXGRP
-	S_IROTH
-	S_IWOTH
-	S_IXOTH
+	- S_ISDIR
+	- S_IRUSR
+	- S_IWUSR
+	- S_IXUSR
+	- S_IRGRP
+	- S_IWGRP
+	- S_IXGRP
+	- S_IROTH
+	- S_IWOTH
+	- S_IXOTH
 
 
 
@@ -59,7 +59,7 @@
 
 3. Comment détecter une erreur sur l'appel à readdir ?
 	Si readdir rencontre une erreur il renvoie null, on doit tester ce cas.
-    
+
 4. Comment effectuer la gestion des erreurs avec readdir ?
 	Dans le cas ou readdir renvoie null on verifie la valeur renvoyee dans la variable errno.
 

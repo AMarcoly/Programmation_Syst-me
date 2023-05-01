@@ -3,7 +3,6 @@
 #include <stdnoreturn.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include <dirent.h>
 #include <string.h>
 #include <fnmatch.h>
@@ -13,7 +12,6 @@
 #include <unistd.h>
 
 #define CHK(op) do { if ( (op) == -1) raler (1,#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (1,#op);  } while(0)
 
 noreturn void raler(int syserr,  const char *msg, ...){
     va_list ap;
@@ -35,7 +33,11 @@ void ls_rec(char * pathname){
     struct dirent *dp;
     
     //ouverture du repertoire
-    CHK2(dir=opendir(pathname));
+    dir=opendir(pathname);
+    if(dir==NULL){
+        perror("opendir");
+        exit(EXIT_FAILURE);
+    }
 
     //boucle d'affichage
     while((dp=readdir(dir))!=NULL){
@@ -82,7 +84,7 @@ void ls_rec(char * pathname){
 int main(int argc, char * argv[]){
 
     //test si bon nombre d'arguments
-    if(argc < 2){
+    if(argc != 2){
         fprintf(stderr, "Erreur us : %s <source> \n",argv[0]);
         exit(EXIT_FAILURE);
     }
