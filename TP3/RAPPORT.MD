@@ -25,3 +25,19 @@
     Lorsque l'ordonanceur passe au processus fils 2 le processus 1 n'a pas eu le temps de finir et entre temps le processus 2 se termine. Et on revient au processus 1 qui se termine a son tour.
 
 
+## Exercice 3
+
+**Questions:**
+
+1. Comment utiliser execvp avec les arguments passés en ligne de commande et stockés dans le tableau char *argv[] ?
+    Pour gerer cela, j'ai cree dans le code avant le `fork` un tableau de meme taille que le nombre d'arguments places en parametres.
+    Le premier argument est le nom de la fonction, le second la commande Unix suivi de la liste de ses parametres.
+    Ainsi, je peux me servir de ce tableau pour faire appel a la commande execvp.
+2. Dans quel cas le processus fils renvoie le code 1 (=EXIT_FAILURE) ?
+    Le processus fils renvoie 1 si la commande Unix place en parametre est bon mais pas ses parametres.
+
+## Exercice 4
+**Questions:**
+
+1. Exécuter le programme en redirigeant la sortie standard vers un fichier :
+    Ce fichier est-il bien formé ? Comment expliquer le résultat ?

@@ -8,16 +8,12 @@
 #include <sys/stat.h>  
 #include <sys/wait.h>                    
 
-
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (#op);  } while(0)
-
 
 void raler(const char * msg){
 	perror(msg);
 	exit(1);
 }
-
 
 /**
  * Écrire le programme run qui prend en paramètre un nom de commande Unix suivi de ses paramètres, puis crée un processus fils
@@ -25,21 +21,21 @@ void raler(const char * msg){
  * Le processus père attend la terminaison de son fils puis affiche le code de retour du fils. 
  * Si la commande Unix donnée en paramètre n'est pas une commande valide, le processus fils retourne le code 2.
 */
-
 int main(int argc, char * argv[]){
 
 	//variables
 	pid_t pid; 
 	int status;
 
+	// declaration tableau de string 
 	char * tab[argc];
 
+	// recuperation des arguments de la commande Unix place en parametre
 	for(int i=0; i<argc-1; i++){
 		char * tmp = argv[i+1];	
 		tab[i]= (char *)tmp;
 	}
 	tab[argc-1]=NULL;
-
 
 	// fork
 	CHK(pid=fork());
