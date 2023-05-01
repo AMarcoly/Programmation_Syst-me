@@ -24,11 +24,11 @@ Il faut inclure en en-tete :
 
 4. Si on oublie de mettre les permissions le fichier est cree mais on n'arrivera pas l'ouvrir, par exemple si on effectue dessus la commande cmp on aura le message d'erreur;
 
-cmp test1.odt test2.odt 
-cmp: test2.odt: Permission non accordée
+    cmp test1.odt test2.odt 
+    cmp: test2.odt: Permission non accordée
 
-Le fichier sera donc protege.
-Cela est du notamment au fait que le fichier a recupere le premier nombre qu'il a trouve sur la pile comme permission, ce nombre est aleatoire.
+    Le fichier sera donc protege.
+    Cela est du notamment au fait que le fichier a recupere le premier nombre qu'il a trouve sur la pile comme permission, ce nombre est aleatoire.
 
 ## Exercice 2
 
@@ -74,6 +74,18 @@ Cela est du notamment au fait que le fichier a recupere le premier nombre qu'il 
     |  512|   216 |
     |  1024|   144 |
     |  4096|   104|
+
+
+| Taille du buffer(octets) | Temps cp_sys (ms) |
+|:------------------------:|:-----------------:|
+|            1             |      126 299      | 
+|            8             |      14 921       | 
+|            16            |       7 430       | 
+|           256            |       1 907       |
+|           512            |       1 604       |
+|           1024           |        558        |
+|           2048           |        108        |
+
 
 # exercice 5
 
