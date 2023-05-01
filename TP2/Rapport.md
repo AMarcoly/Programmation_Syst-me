@@ -68,5 +68,6 @@
 1. Détailler la stratégie employée pour effectuer la recherche de chaîne au sein d'un fichier.
 
 	J'ouvre mon repertoire et je regarde tout d'abord s'il n'est pas vide.
-	S'il ne l'est pas je le parcours entierement en creant les nouveaux chemins. Si le fichier est regulier , je l'ouvre et je cherche la chaine de caractere passée en paramètre grace a la fonction strstr. Si le fichier est un repertoire je lance de maniere recursive le programme sur le repertoire trouvé.
+	S'il ne l'est pas je le parcours entierement en creant les nouveaux chemins.Pour chaque chemin ainsi cree : si le fichier est regulier , je l'ouvre et je cherche la chaine de caractere passée en paramètre grace a la fonction strstr. Si le fichier est un repertoire je lance de maniere recursive le programme sur le repertoire trouvé.
+    La fonction strstr renvoie la premiere occurence de la sous-chaine dans la chaine ou NULL s'il ne la trouve pas.
 
