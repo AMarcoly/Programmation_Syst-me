@@ -10,7 +10,6 @@
 
 
 #define CHK(op) do { if ( (op) == -1) raler (1,#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (1,#op);  } while(0)
 
 noreturn void raler(int syserr,  const char *msg, ...){
     va_list ap;
@@ -33,7 +32,11 @@ void ls1(void){
 
 
 	//ouverture repertoire
-	CHK2(dir=opendir("."));
+	dir=opendir(".");
+    if(dir==NULL){
+        perror("opendir");
+        exit(EXIT_FAILURE);
+    }
 
 	//parcours du repertoire
 	while((d=readdir(dir))!=NULL){
