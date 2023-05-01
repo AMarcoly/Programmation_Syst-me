@@ -1,4 +1,4 @@
-all : ecoute_active ecoute_passive
+all : ecoute_active ecoute_passive attente compteur
 CC = gcc -g
 CFLAGS = -Wall -Wextra
 LDFLAGS = -lm
@@ -13,12 +13,22 @@ ecoute_passive: ecoute_passive.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	rm -r *.o
 
+attente: attente.o 
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	rm -r *.o
+	
+compteur: compteur.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	rm -r *.o
+
 %.o : %.c
 	$(CC) $(CFLAGS) -c $<
 
 clean :
 	rm ecoute_active
 	rm ecoute_passive
+	rm attente
+	rm compteur
 
 cleantxt :
 	rm *.txt

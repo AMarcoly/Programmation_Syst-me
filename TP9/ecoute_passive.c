@@ -6,10 +6,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
-
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
-
-
 
 /**
  * @brief Fonction raler qui va s'occuper d'afficher les erreurs sur la sortie erreur standard

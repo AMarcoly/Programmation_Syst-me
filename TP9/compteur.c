@@ -9,7 +9,6 @@
 
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
 
-
 /**
  * @brief Fonction raler qui va s'occuper d'afficher les erreurs sur la sortie erreur standard
  * 
@@ -20,7 +19,6 @@ void raler(const char * msg){
     perror(msg);
     exit(EXIT_FAILURE);
 }
-
 
 volatile sig_atomic_t compteur=0; 
 
@@ -38,7 +36,9 @@ int main(){
 	s.sa_handler =f; 
 	s.sa_flags=0; 
 	sigemptyset(&s.sa_mask);
-	sigaction(SIGINT,&s,NULL);
+	if(sigaction(SIGINT,&s,NULL)==-1){
+		raler("sigaction");
+	}
 
 	sigset_t vide,mask,old;
 	sigemptyset(&vide); 
@@ -54,7 +54,7 @@ int main(){
 		// printf("Compteur =%d\n",compteur);
 	}
 	//fin section critique
-	sigprocmask(SIG_SETMASK,&old,NULL);
+	if(sigprocmask(SIG_SETMASK,&old,NULL)==-1) raler("sigpromask");
 }
 // on evite de mettre printf dans les fonctions traitantes, mais tp demande c pas grave.
 // mieux vaut use write dans fonction traitante.
