@@ -17,12 +17,16 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-
-#define CHK(op) do { if ( (op) == NULL) raler (1,#op);  } while(0)
 #define CHK2(op) do { if ( (op) == -1) raler (1,#op);  } while(0)
 
-
-
+/**
+ * @brief Fonction raler qui renvoie le message d'erreur 
+ * 
+ * @param syserr 
+ * @param msg 
+ * @param ... 
+ * @return noreturn 
+ */
 noreturn void raler(int syserr,  const char *msg, ...){
     va_list ap;
 
@@ -42,17 +46,19 @@ noreturn void raler(int syserr,  const char *msg, ...){
  * @brief Fonction qui prend en parametre deux noms de fichiers
  et copie les donnees du fichier source dans le fichier destination
  * 
- * @param fichiersrc 
- * @param fichierdest 
+ * @param fichiersrc fichier source 
+ * @param fichierdest fichier destination
  */
  void cp_std (const char *fichiersrc, const char *fichierdest){
     FILE *src, *dest; //
     int c;//entier qui va prendre le retour de fget 
 
     //ouverture du fichier source
-    CHK(src=fopen(fichiersrc, "r"));
+    src=fopen(fichiersrc, "r");
+    if(src==NULL) raler(1,"fopen src");
     //ouverture du fichier destination
-    CHK(dest=fopen(fichierdest,"w"));
+    dest=fopen(fichierdest,"w");
+    if(dest==NULL) raler(1,"fopen dest");
 
     //boucle de la copie
     while ((c = fgetc(src)) != EOF )
@@ -72,8 +78,8 @@ noreturn void raler(int syserr,  const char *msg, ...){
 /**
  * @brief main pour faire les test
  * 
- * @param argc 
- * @param argv 
+ * @param argc nbr arguments
+ * @param argv tableau liste des arguments
  * @return int 
  */
 int main(int argc, char * argv[]){
@@ -86,6 +92,6 @@ int main(int argc, char * argv[]){
     
     //appel de la fonction
     cp_std(argv[1],argv[2]);
-
+    // sortie
     exit(EXIT_SUCCESS);
 }

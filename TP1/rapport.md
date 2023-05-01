@@ -2,8 +2,6 @@
 
 # Exo1
 
-
-
 1. Les flags se trouvent dans la page 2 du man de open. Commande "man 2 open".
 Il faut donc mettre les fichiers includes : 
     <sys/types.h>
@@ -76,12 +74,22 @@ Il faut inclure en en-tete :
 |           1024           |       144         |
 |           2048           |        104        |
 
+2. La taille de buffer utilise est d'au moins 512 octets dans les bibliotheques standard.(Généralement on utilise 1 024 octets).
 
-# exercice 5
+# Exercice 4
+
+1. Comment positionner la tête de lecture à la fin du fichier ?
+    Pour positionner la tete de lecture a la fin du fichier on utilise la fonction lseek avec comme option SEEK_END.
+
+2. Comment faire « reculer » la tête de lecture ?
+    TOn recule la tete de lecture toujours en utilisant lseek. Mais en utilisant SEEK_CUR et une position relative en negatif.
+    Cependant on doit faire attention a au plus revenir a la position 0.
+
+# Exercice 5
 
 1.  Que se passe-t-il si on essaie de lire à une position de valeur négative ?
 
-La fonction lseek nous renvoie l'erreur :
+    La fonction lseek nous renvoie l'erreur :
     lseek(fd_fichier,pos,SEEK_SET)
     Invalid argument
     car la position negative est un argument invalide et empeche donc le placement du curseur.

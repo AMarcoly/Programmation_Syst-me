@@ -45,12 +45,9 @@ void cp_rev(const char * fichiersrc, const char * fichierdest){
     char c;
     ssize_t n; //nombre de caracteres dans le fichier
 
-
     //ouverture des fichiers
     CHK( fd_src=open(fichiersrc,O_RDONLY));
     CHK(fd_dest=open(fichierdest, O_WRONLY | O_CREAT | O_TRUNC, 0666));
-
-
 
     //positionnement en derniere position du curseur
     CHK(n=lseek(fd_src, -1,SEEK_END )); //n contient le nombre de bytes du fichier
@@ -64,34 +61,6 @@ void cp_rev(const char * fichiersrc, const char * fichierdest){
             CHK(lseek(fd_src, -2, SEEK_CUR));
         n--;//decrementation du nombre d'octets 
     }
-
-
-
-    // //recuperation nombre d'octets
-    // CHK(stat(fichiersrc,&stbuf));
-    // size=stbuf.st_size;
-
-    // //positionnement en derniere position du curseur
-    // CHK(size=lseek(fd_src,-1,SEEK_END)); //n contient le nombre de bytes du fichier
-    // //lseek renvoie taille du fichier
-    // size--;
-    // CHK(lseek(fd_src,size,SEEK_CUR));
-    // CHK(read(fd_src,&c,1));
-    // printf("%c\n",c);
-
-    //boucle de copie
-    // while ( size >= 0 ) {
-        
-    //     CHK(lseek(fd_src,size,SEEK_CUR));
-    //     CHK(read(fd_src,&c,1));
-    //     printf("%c\n",c);
-    //     CHK(write(fd_dest,&c,1));
-    //     size-=2;
-
-    //     // if(n!=0)
-    //     //     CHK(lseek(fd_src, -2, SEEK_CUR));
-    //     // n--;//decrementation du nombre d'octets 
-    // }
 
     CHK(close(fd_src));
     CHK(close(fd_dest));
