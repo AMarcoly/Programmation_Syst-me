@@ -5,13 +5,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
 
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (#op);  } while(0)
 
 
 void raler(const char * msg){
@@ -27,7 +24,6 @@ puis les deux processus (père et fils) lisent les caractères l’un après l�
 et les écrivent avec write sur la sortie standard.
 Expérimentez ce programme avec un fichier texte de taille assez grande.
 */
-
 void fork3(const char * pathname){
 	// variables
 	int file_descriptor;
@@ -46,12 +42,10 @@ void fork3(const char * pathname){
 	dup2(file_d_sortie,STDOUT_FILENO);
 	CHK(close(file_d_sortie));
 
-
 	// creation du processus fils
 	CHK(pid_fils = fork());
 
-	
-	//  
+	// switch
 	switch (pid_fils){
 		case -1 :
 			raler("fork");
@@ -60,10 +54,8 @@ void fork3(const char * pathname){
 				CHK(write(STDOUT_FILENO,&c,1));
 				caractere_lu += nbr_octets;
 			}
-			CHK(nbr_octets);
-
-
-		exit(EXIT_SUCCESS);
+			if(nbr_octets==-1) raler("read");
+			exit(EXIT_SUCCESS);
 	}
 
 	// pere 
@@ -76,14 +68,11 @@ void fork3(const char * pathname){
 		}
 		CHK(nbr_octets);
 		CHK(close(file_descriptor));
-		//printf("caractere_lu :%d\n",caractere_lu);
 	}
 	else{
 		CHK(close(file_descriptor));
-		//printf("caractere_lu :%d\n",caractere_lu);
 		raler("echec sortie");
 	}
-	//printf("caractere_lu :%d\n",caractere_lu);
 }
 
 
@@ -100,3 +89,40 @@ int main(int argc, char * argv[]){
     exit(EXIT_SUCCESS);
 
 }
+
+
+// version 1 
+
+// void fork3(const char * pathname){
+// 	// variables
+// 	int file_descriptor;
+// 	pid_t pid_fils;
+// 	ssize_t nbr_octets;
+// 	int status;
+// 	char c;
+// 	int caractere_lu=0;
+
+// 	// ouverture du fichier en lecture
+// 	CHK(file_descriptor= open(pathname,O_RDONLY));
+
+// 	// creation du processus fils
+// 	CHK(pid_fils = fork());
+
+// 	// switch
+// 	switch (pid_fils){
+// 		case -1 :
+// 			raler("fork");
+// 		case 0 : // fils 
+// 			while((nbr_octets=read(file_descriptor,&c,1))>0){
+// 				CHK(write(STDOUT_FILENO,&c,1));
+// 				caractere_lu += nbr_octets;
+// 			}
+// 			if(nbr_octets==-1) raler("read");
+// 			exit(EXIT_SUCCESS);
+// 	}
+
+// 	// pere 
+// 	CHK(wait(&status));
+// 	CHK(close(file_descriptor));
+// 	exit(EXIT_SUCCESS);
+// }

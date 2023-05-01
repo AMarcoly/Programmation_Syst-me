@@ -8,16 +8,12 @@
 #include <sys/stat.h>  
 #include <sys/wait.h>                    
 
-
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (#op);  } while(0)
-
 
 void raler(const char * msg){
 	perror(msg);
 	exit(1);
 }
-
 
 /**
  * Écrivez un programme script.c équivalent au script shell suivant, 
@@ -30,7 +26,6 @@ void raler(const char * msg){
  * nécessaires grâce à la primitive dup (ou dup2) ;
  * réaliser l’affichage final avec la primitive write.
 */
-
 void script(const char * username){
 	// variables
 	pid_t pid1,pid2,pid3;
@@ -41,7 +36,7 @@ void script(const char * username){
 	CHK(fd = open("toto",O_WRONLY|O_CREAT|O_TRUNC,0666));
 	// fork 
 	CHK(pid1=fork());
-
+	// switch
 	switch(pid1){
 		case -1 : raler("fork");
 			break; 
@@ -56,7 +51,7 @@ void script(const char * username){
 	
 	// fils 2 : fork
 	CHK(pid2=fork());
-
+	// switch
 	switch(pid2){
 		case -1 : raler("fork");
 			break;
@@ -98,12 +93,15 @@ void script(const char * username){
 	}
 
 	CHK(close(fd));
-
 }
 
-
-
-
+/**
+ * @brief Main 
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char * argv[]){
 	//test si bon nombre d'arguments
     if(argc != 2){
