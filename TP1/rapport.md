@@ -65,16 +65,6 @@ Il faut inclure en en-tete :
 |:----------------:|
 | 504(ms)|
 
-    |Taille du buffer (octets) | Temps `cp_sys` (ms) |
-    |:----------------:|:--------------:|
-    |  1|   17293|
-    |  8|   8981|
-    |  16|   649|
-    |  256|   347|
-    |  512|   216 |
-    |  1024|   144 |
-    |  4096|   104|
-
 
 | Taille du buffer(octets) | Temps cp_sys (ms) |
 |:------------------------:|:-----------------:|
@@ -89,23 +79,21 @@ Il faut inclure en en-tete :
 
 # exercice 5
 
-# Question 1 Que se passe-t-il si on essaie de lire à une position de valeur négative ?
+1.  Que se passe-t-il si on essaie de lire à une position de valeur négative ?
 
 La fonction lseek nous renvoie l'erreur :
     lseek(fd_fichier,pos,SEEK_SET)
     Invalid argument
-car la position negative est un argument invalide et empeche donc le placement du curseur.
+    car la position negative est un argument invalide et empeche donc le placement du curseur.
 
-# Question 2 Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
+2. Que se passe-t-il si on essaie de lire au delà de la fin du fichier ?
 
     Le programme renvoie l'entier 0 ceci est du au fait qu'il n'y a pas de valeur a cet endroit donc
     pour puvoir fonctionner il remplit jusqu'a position avec des zeros. Ceci nous empeche de voir s'il y a erreur ou pas.
         "L'entier lu est 0"
 
-# Question 3 Comment faire pour afficher une erreur dans ce cas ?
+3.  Comment faire pour afficher une erreur dans ce cas ?
 
-Pour pallier a ceci j'ai mis une condition pour que la position doit obligatoirement etre un nombre entre 0 et taille du fichier.
+    Pour pallier a ceci j'ai mis une condition pour que la position doit obligatoirement etre un nombre entre 0 et taille du fichier.
 
-# Question 4
-
-Si on écrit au delà de la fin du fichier. Des zeros sont ajoutés jusqu'à la position où l'on souhaite écrire.
+4. Si on écrit au delà de la fin du fichier. Des zeros sont ajoutés jusqu'à la position où l'on souhaite écrire.
