@@ -84,7 +84,11 @@ Il faut inclure en en-tete :
 2. Comment faire « reculer » la tête de lecture ?
     TOn recule la tete de lecture toujours en utilisant lseek. Mais en utilisant SEEK_CUR et une position relative en negatif.
     Cependant on doit faire attention a au plus revenir a la position 0.
-
+3. Quelles sont les différentes possibilités pour connaître la taille d'un fichier ?
+    Il esxiste differentes possibilites :
+        - stat()
+        - en utilisant lseek(comme fait dans cp_rev)
+        
 # Exercice 5
 
 1.  Que se passe-t-il si on essaie de lire à une position de valeur négative ?
