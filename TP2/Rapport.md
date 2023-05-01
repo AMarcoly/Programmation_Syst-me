@@ -52,14 +52,16 @@
 
 1. Comment gérer l'aspect récursif de l'affichage des fichiers dans les sous-répertoires ?
 	En programmant le programme de maniere a ce que quand on se trouve dans un repertoire un nouveau appel a ls_rec est fait.
+    (Appels recursifs successifs sur les repertoires)
 
 2. Quelle doit être la taille de buffer à passer en deuxième paramètre de snprintf ?
 	Le buffer doit etre de la meme taille que la nouvelle chaine créee qu'on recupere avec sizeof(nom_nouvelle_chaine)
 
 3. Comment détecter une erreur sur l'appel à readdir ?
 	Si readdir rencontre une erreur il renvoie null, on doit tester ce cas.
+    
 4. Comment effectuer la gestion des erreurs avec readdir ?
-	Dans le cas ou readdir renvoie null on 
+	Dans le cas ou readdir renvoie null on verifie la valeur renvoyee dans la variable errno.
 
 ## Exercice 4
 
