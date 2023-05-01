@@ -36,7 +36,7 @@ void pip_c(void){
     //fork
     CHK(pid_1 = fork());
 
-    // 
+    // switch
     switch (pid_1){
     case -1 : raler("fork");
         break; 
@@ -71,9 +71,6 @@ void pip_c(void){
 
 
 int main(void){
-    // if(argc<1){
-    //      exit(EXIT_FAILURE);
-    // }
     pip_c();
     exit(EXIT_SUCCESS);
 }

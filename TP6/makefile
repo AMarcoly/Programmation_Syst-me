@@ -35,10 +35,6 @@ pip_red2 : pip_red2.o
 	$(CC) $(CFLAGS) -c $<
 
 clean : 
-	rm -r *.o
-
-
-cleanExec :
 	rm pip_a
 	rm pip_b
 	rm pip_c
