@@ -19,15 +19,15 @@ Il faut inclure en en-tete :
 3. Si on oublie de mettre le flag O_CREAT on a le message d'erreur :
     dest=open(fichierdest,O_WRONLY )
     No such file or directory
-
-Ce message nous dit que la primitive systeme open a echoue car elle n'a pas pu ouvrir le fichier destination qui n'existe pas.(car n'a pas ete cree).
+    
+    Ce message nous dit que la primitive systeme open a echoue car elle n'a pas pu ouvrir le fichier destination qui n'existe pas.(car n'a pas ete cree).
 
 4. Si on oublie de mettre les permissions le fichier est cree mais on n'arrivera pas l'ouvrir, par exemple si on effectue dessus la commande cmp on aura le message d'erreur;
 
 cmp test1.odt test2.odt 
 cmp: test2.odt: Permission non accordée
 
-le fichier sera donc protege.
+Le fichier sera donc protege.
 Cela est du notamment au fait que le fichier a recupere le premier nombre qu'il a trouve sur la pile comme permission, ce nombre est aleatoire.
 
 ## Exercice 2
@@ -42,23 +42,24 @@ Cela est du notamment au fait que le fichier a recupere le premier nombre qu'il 
 3. La constante EOF est un caractere utilise pour notifier de la fin d'un fichier. Ce n'est pas un caractere present dans le fichier.
 
 # Exercice 3
-Le temps d'exec avec cp_sys est :
 
-time ./cp_sys ../bigfile ../bigfile2
+1. Le temps d'exec avec cp_sys est :
 
-real	3m29,042s
-user	0m8,784s
-sys	3m20,220s
+    time ./cp_sys ../bigfile ../bigfile2
 
-Avec cp-std le temps d'execution est ;
+    real	3m29,042s
+    user	0m8,784s
+    sys	3m20,220s
+
+2. Avec cp-std le temps d'execution est ;
     time ./cp_std ../bigfile ../bigfile2
 
-real	0m0,527s
-user	0m0,435s
-sys	0m0,092s
+    real	0m0,527s
+    user	0m0,435s
+    sys	0m0,092s
 
 
-La fonction cd_std est beaucoup plus efficace que la fonction cp_sys
+- La fonction cd_std est beaucoup plus efficace que la fonction cp_sys
 
 | Temps `cp_std` (ms)|
 |:----------------:|
@@ -66,13 +67,13 @@ La fonction cd_std est beaucoup plus efficace que la fonction cp_sys
 
     |Taille du buffer (octets) | Temps `cp_sys` (ms) |
     |:----------------:|:--------------:|
-    |  1               |   17293        |
-    |  8               |   8981           |
-    |  16              |   649             |
-    |  256             |   347            |
-    |  512             |   216           |
-    |  1024            |   144           |
-    |  4096            |   104           |
+    |  1|   17293|
+    |  8|   8981|
+    |  16|   649|
+    |  256|   347|
+    |  512|   216 |
+    |  1024|   144 |
+    |  4096|   104|
 
 # exercice 5
 
