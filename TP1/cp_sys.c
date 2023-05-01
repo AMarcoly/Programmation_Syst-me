@@ -38,15 +38,14 @@ noreturn void raler(int syserr,  const char *msg, ...){
     exit(EXIT_FAILURE);
 }
 
+//version_2
 
 /**
  * @brief Fonction qui prend en parametres deux noms de fichiers
  * et recopie le contenu du premier dans le second octet par octet
- * @param fichiersrc 
- * @param fichierdest 
+ * @param fichiersrc le fichier source
+ * @param fichierdest le fichier destination
  */
-
-
 void cp_sys(const char * fichier_src, const char * fichier_dest, const int taille_buffer){
     //Declaration des variables
     int fd_src, fd_dest;
@@ -58,9 +57,8 @@ void cp_sys(const char * fichier_src, const char * fichier_dest, const int taill
     CHK(fd_dest = open(fichier_dest, O_WRONLY | O_CREAT , 0666));
 
     //test de la boucle de lecture
-    //version_2
+    
 
-    //Faut-il use adresse de buffer ou buffer directement?
     while( (n=read(fd_src,&buffer,taille_buffer)) > 0){
         CHK(write(fd_dest,&buffer,taille_buffer));
     }
@@ -72,7 +70,13 @@ void cp_sys(const char * fichier_src, const char * fichier_dest, const int taill
     CHK(close(fd_dest));
 }
 
-
+/**
+ * @brief Main 
+ * 
+ * @param argc Nombre de parametres place au clabeu
+ * @param argv tableau de char * contenant les parametres
+ * @return int 
+ */
 int main(const int argc , char * argv[]){
 
      //test du nombre d'arguments
@@ -89,6 +93,7 @@ int main(const int argc , char * argv[]){
 }
 
 /*
+// version 1
 
 void cp_sys(const char *fichiersrc, const char *fichierdest){
     int src,dest;   //va recuperer les fd des fonctions open
