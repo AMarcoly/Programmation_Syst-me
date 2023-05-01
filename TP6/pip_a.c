@@ -16,10 +16,7 @@
 #include <sys/wait.h>
 #include <string.h>
 
-
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (#op);  } while(0)
-
 
 /**
  * @brief Fonction raler qui va s'occuper d'afficher les erreurs sur la sortie erreur standard
@@ -32,7 +29,7 @@ void raler(const char * msg){
     exit(EXIT_FAILURE);
 }
 
- void pipe_a(){
+void pipe_a(){
     //creation processus fils
     // pere envoie dans le tube la chaine "Je suis le pere et je transmets le message a mon fils"
     //le fils recupere le message dans le tube et l'affiche
@@ -49,8 +46,7 @@ void raler(const char * msg){
     
     //fork
     pid=fork();
-
-    //
+    // switch
     switch(pid){
         case -1 : raler("fork");
             break;
@@ -64,15 +60,17 @@ void raler(const char * msg){
     }
 
     //dans le pere
-    
-    CHK(close(fd[0])); // fermeture extremite en ecri
+    CHK(close(fd[0])); // fermeture extremite en ecriture
     CHK(write(fd[1], chaine,strlen(chaine)));
     CHK(close(fd[1]));
     CHK(wait(NULL));
-
 }
 
-
+/**
+ * @brief Main 
+ * 
+ * @return int 
+ */
 int main(){
     // if(argc<1){
     //     exit(EXIT_FAILURE);
