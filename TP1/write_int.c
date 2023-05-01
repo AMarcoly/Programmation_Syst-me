@@ -7,7 +7,6 @@
 #include <fcntl.h>
 
 #define CHK(op) do { if ( (op) == -1) raler (1,#op);  } while(0)
-#define CHK2(op) do { if ( (op) == NULL) raler (1,#op);  } while(0)
 
 noreturn void raler(int syserr,  const char *msg, ...){
     va_list ap;
@@ -41,7 +40,12 @@ void read_int(const char * filename, off_t pos, int64_t number){
 			CHK(write(fd,&zero,1));
 		}
 	}
-		
+
+	// Si la position donnee est negative	
+	if(pos<0){
+		perror("Position invalide\n");
+		exit(1);
+	}
 
 	//On se deplace jusqu'a la position
 	lseek(fd,pos,SEEK_SET);
@@ -59,7 +63,7 @@ int main(int argc,  char * argv[]){
 
      //test du nombre d'arguments
     if( argc != 4){
-        fprintf(stderr, "Erreur us : %s <source> <destination>\n",argv[0]);
+        fprintf(stderr, "Erreur us : %s <source> <pos> <int64t>\n",argv[0]);
         exit(EXIT_FAILURE);
     }
 

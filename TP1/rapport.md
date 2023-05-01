@@ -88,7 +88,7 @@ Il faut inclure en en-tete :
     Il esxiste differentes possibilites :
         - stat()
         - en utilisant lseek(comme fait dans cp_rev)
-        
+
 # Exercice 5
 
 1.  Que se passe-t-il si on essaie de lire à une position de valeur négative ?
@@ -105,7 +105,6 @@ Il faut inclure en en-tete :
         "L'entier lu est 0"
 
 3.  Comment faire pour afficher une erreur dans ce cas ?
-
     Pour pallier a ceci j'ai mis une condition pour que la position doit obligatoirement etre un nombre entre 0 et taille du fichier.
 
-4. Si on écrit au delà de la fin du fichier. Des zeros sont ajoutés jusqu'à la position où l'on souhaite écrire.
+4. Si on écrit au delà de la fin du fichier. Des zeros sont ajoutés jusqu'à la position où l'on souhaite écrire. Cas pris en compte dans mon algorithme.
