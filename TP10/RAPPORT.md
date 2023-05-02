@@ -1,0 +1,5 @@
+
+1. Il est important de faire appel à sigaction avant l'appel à fork car les handlers (les fonctions de traitement associées aux signaux) sont héritées par les processus fils créés par fork. Si l'on ne met pas en place les handlers avant l'appel à fork, les processus fils ne disposeront pas de ces handlers et risquent de ne pas traiter les signaux de manière adéquate.
+
+
+2. Si l'appel à sigaction est fait dans le fils après l'appel à fork, le fils héritera des paramètres de gestion des signaux du père. Cela peut poser des problèmes si le père a modifié les paramètres par rapport à la valeur par défaut, car le fils pourrait alors recevoir un signal avec une gestion différente de celle qu'il attendait. Par conséquent, il est généralement recommandé de configurer la gestion des signaux avant d'appeler fork pour éviter ce type de problème.
