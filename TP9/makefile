@@ -1,4 +1,4 @@
-all : ecoute_active ecoute_passive attente compteur
+all : ecoute_active ecoute_passive attente compteur masque
 CC = gcc -g
 CFLAGS = -Wall -Wextra
 LDFLAGS = -lm
@@ -21,6 +21,10 @@ compteur: compteur.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	rm -r *.o
 
+masque: masque.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	rm -r *.o
+
 %.o : %.c
 	$(CC) $(CFLAGS) -c $<
 
@@ -29,6 +33,7 @@ clean :
 	rm ecoute_passive
 	rm attente
 	rm compteur
+	rm masque
 
 cleantxt :
 	rm *.txt
