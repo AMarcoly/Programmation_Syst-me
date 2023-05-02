@@ -32,3 +32,16 @@
 
     La partie du main qui est en section critique est la partie entre les deux primitives sigprocmask
         Le signal est masque dans cette partie .
+
+## Exercice 5
+
+**Questions:**
+
+1. Si le signal arrive avant le masquage, pendant le premier appel à sleep, le programme sera interrompu et la fonction associée au signal sera appelée. La fonction affichera le message et le programme se terminera immédiatement.
+
+2. Le signal sera traité normalement et la fonction associée sera appelée pour afficher le message MSG. Le signal ne sera pas masqué, car le masquage a déjà été annulé. Le signal pourra être de nouveau reçu et traité normalement. 
+Après l'affichage du message, le programme attendra la fin du délai de sleep avant de se terminer normalement.
+
+3. Si le signal arrive pendant que le signal est masqué, il ne sera pas traité immédiatement car il est masqué. Le signal sera en attente jusqu'à ce que le masquage soit annulé. Une fois le signal démasqué, le signal sera traité normalement et la fonction sera appelée pour afficher le message `MSG`. Le programme attendra la fin du délai de sleep avant de se terminer normalement.
+
+4. 
