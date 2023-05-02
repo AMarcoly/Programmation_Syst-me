@@ -41,13 +41,14 @@ int main(){
 	}
 
 	sigset_t vide,mask,old;
-	sigemptyset(&vide); 
+	CHK(sigemptyset(&mask)); 
 
-	sigemptyset(&mask);
-	sigaddset(&mask,SIGINT);
+	
 
 	sigprocmask(SIG_BLOCK,&mask,&old);
-
+	
+	sigemptyset(&mask);
+	sigaddset(&mask,SIGINT);
 	// debut section critique
 	while(compteur<5){
 		sigsuspend(&vide);

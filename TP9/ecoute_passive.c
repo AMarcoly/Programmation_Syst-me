@@ -43,10 +43,10 @@ void ecoute_passive(){
     struct sigaction s;
     s.sa_handler = f;
     s.sa_flags=0;
-    sigaction(SIGUSR1,&s,NULL);
+    if(sigaction(SIGUSR1,&s,NULL)==-1) raler("sigaction");
     // sigaddset masque fait attendre tous les signaux sauf celui masque
     
-    sigsuspend(&vide);
+    sigsuspend(&vide); // sigsuspend renvoie toujours -1
 }
 
 /**

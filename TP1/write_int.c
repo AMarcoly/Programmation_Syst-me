@@ -23,7 +23,7 @@ noreturn void raler(int syserr,  const char *msg, ...){
 }
 
 
-void read_int(const char * filename, off_t pos, int64_t number){
+void write_int(const char * filename, off_t pos, int64_t number){
 	//declaration variables
 	ssize_t size = 0;
 	int fd =0;
@@ -68,7 +68,7 @@ int main(int argc,  char * argv[]){
     }
 
     //Appel fonction
-    read_int(argv[1],atoi(argv[2]),atoi(argv[3]));
+    write_int(argv[1],atoi(argv[2]),atoi(argv[3]));
     
     exit(EXIT_SUCCESS);
 }

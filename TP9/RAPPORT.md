@@ -25,9 +25,10 @@
 
 1. Qu'appelle-t-on section critique ?
 
-    Une section critique est une partie de code qui doit être exécutée sans interruption par d'autres processus ou threads pour éviter les conflits d'accès ou des incohérences dans les données manipulées.
+    Une section critique est une partie de code qui doit être exécutée sans interruption par d'autres processus pour éviter les conflits d'accès ou des incohérences dans les données manipulées.
+    Les signaux y sont masques.
 
 2. Quelle partie du main est en section critique ?
 
-    La partie du main qui est en section critique est la bouche while qui attend le signal 5 fois.
-        Ligne 
+    La partie du main qui est en section critique est la partie entre les deux primitives sigprocmask
+        Le signal est masque dans cette partie .

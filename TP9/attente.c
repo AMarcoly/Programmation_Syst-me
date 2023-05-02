@@ -22,8 +22,26 @@ void raler(const char * msg){
     exit(EXIT_FAILURE);
 }
 
-void attente(){
+void f(int num_sig){
+    dup2(STDERR_FILENO,STDOUT_FILENO);
+    psignal(num_sig,"Signal ");
+    exit(EXIT_SUCCESS);
+}
 
+void attente(){
+    struct sigaction s;
+    s.sa_handler = f;
+
+    for(int signal=1;signal<32;signal++){
+        if((signal != SIGKILL) && (signal!=SIGSTOP)){
+            if(sigaction(signal,&s,NULL)==-1) raler("sigaction");
+        }
+    }
+
+    sigset_t mask;
+    if(sigemptyset (&mask) == -1)raler("sigemptyset");
+
+    sigsuspend(&mask);
 }
 
 int main(){
