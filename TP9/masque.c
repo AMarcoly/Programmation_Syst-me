@@ -28,6 +28,34 @@ void f(int num_sig){
 }
 
 int main(){
-  
+    
+    
+    sigset_t new,old;
+
+    // sigaction 
+    struct sigaction s;
+    s.sa_handler = f;
+    s.sa_flags =0;
+    sigemptyset(&s.sa_mask);
+
+    if(sigaction(SIGINT,&s,NULL)==-1) raler("Sigaction");
+
+    sleep(3);
+
+    // mask
+    sigemptyset(&new);
+    sigaddset(&new,SIGINT);
+    sigprocmask(SIG_BLOCK,&new,&old);
+
+    //
+    sleep(3);
+
+   sigprocmask(SIG_SETMASK,&new,&old);
+
+   //
+   sleep(3);
+
+   exit(EXIT_SUCCESS);
+
 
 }
