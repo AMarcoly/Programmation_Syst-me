@@ -33,27 +33,31 @@ void usr1_handler(int sig) {
 int main() {
     pid_t pid;
     int status;
-    struct sigaction act, oldact;
+    struct sigaction act_p, act_f, oldact;
 
+    // action fils
+    act_f.sa_handler = handler;
+    sigemptyset(&act_f.sa_mask);
+    act_f.sa_flags = 0;
+    CHK(sigaction(SIGALRM, &act_f, &oldact));
+    
+    // action pere
+    act_p.sa_handler = usr1_handler;
+    sigemptyset(&act_p.sa_mask);
+    act_p.sa_flags = 0;
+    CHK(sigaction(SIGUSR1, &act_p, &oldact));
+    
     pid = fork();
     if (pid < 0) {
         perror("Erreur lors de la création du processus fils");
         exit(1);
     } else if (pid == 0) { // Code du processus fils
-        act.sa_handler = handler;
-        sigemptyset(&act.sa_mask);
-        act.sa_flags = 0;
-        CHK(sigaction(SIGALRM, &act, &oldact));
         while(1) {
             alarm(1); // Lance le minuteur 
             sigsuspend(NULL); // Attends jusqu'à ce qu'un signal soit reçu
         }
     } else { // Code du processus père
         sleep(10); // Attends 10 secondes
-        act.sa_handler = usr1_handler;
-        sigemptyset(&act.sa_mask);
-        act.sa_flags = 0;
-        CHK(sigaction(SIGUSR1, &act, &oldact));
         CHK(kill(pid, SIGUSR1)); // Envoie le signal SIGUSR1 au fils
         wait(&status); // Attends la terminaison du fils
     }
