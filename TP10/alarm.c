@@ -1,15 +1,10 @@
-#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include <signal.h>
 #include <string.h>
 
-
 #define CHK(op) do { if ( (op) == -1) raler (#op);  } while(0)
-
-
 
 /**
  * @brief Fonction raler qui va s'occuper d'afficher les erreurs sur la sortie erreur standard
@@ -22,62 +17,46 @@ void raler(const char * msg){
     exit(EXIT_FAILURE);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
+void handler(int sig) {
+    (void)sig;
+    char buf[256] = "Traitement en cours...\n";
+    ssize_t n = write(STDOUT_FILENO,buf ,strlen(buf));
+    if(n==-1) raler("write");
+}
 
-#define MESSAGE "Processus fils\n"
-
-volatile sig_atomic_t stop = 0;
-
-void handle_signal(int sig) {
-    if (sig == SIGUSR1) {
-        write(STDOUT_FILENO, "Signal SIGUSR1 reçu\n", 21);
-        stop = 1;
-    }
+void usr1_handler(int sig) {
+    (void)sig;
+    printf("Le processus fils s'est arrêté\n");
+    exit(0);
 }
 
 int main() {
     pid_t pid;
-
-    struct sigaction action;
-    action.sa_handler = handle_signal;
-    action.sa_flags = 0;
-    sigemptyset(&action.sa_mask);
-    sigaction(SIGUSR1, &action, NULL);
+    int status;
+    struct sigaction act, oldact;
 
     pid = fork();
-    if (pid == -1) {
-        perror("Erreur fork");
-        exit(EXIT_FAILURE);
+    if (pid < 0) {
+        perror("Erreur lors de la création du processus fils");
+        exit(1);
+    } else if (pid == 0) { // Code du processus fils
+        act.sa_handler = handler;
+        sigemptyset(&act.sa_mask);
+        act.sa_flags = 0;
+        CHK(sigaction(SIGALRM, &act, &oldact));
+        while(1) {
+            alarm(1); // Lance le minuteur 
+            sigsuspend(NULL); // Attends jusqu'à ce qu'un signal soit reçu
+        }
+    } else { // Code du processus père
+        sleep(10); // Attends 10 secondes
+        act.sa_handler = usr1_handler;
+        sigemptyset(&act.sa_mask);
+        act.sa_flags = 0;
+        CHK(sigaction(SIGUSR1, &act, &oldact));
+        CHK(kill(pid, SIGUSR1)); // Envoie le signal SIGUSR1 au fils
+        wait(&status); // Attends la terminaison du fils
     }
 
-    if (pid == 0) { // Processus fils
-        struct sigaction action_fils;
-        action_fils.sa_handler = SIG_IGN; // Ignorer le signal SIGALRM dans le fils
-        action_fils.sa_flags = 0;
-        sigemptyset(&action_fils.sa_mask);
-        sigaction(SIGALRM, &action_fils, NULL);
-
-        while (1) {
-            sleep(1);
-            write(STDOUT_FILENO, MESSAGE, sizeof(MESSAGE)-1);
-        }
-
-        exit(EXIT_SUCCESS);
-    } else { // Processus père
-        alarm(10);
-        sigset_t mask, oldmask;
-        sigemptyset(&mask);
-        sigaddset(&mask, SIGUSR1);
-
-        while (!stop) {
-            sigsuspend(&mask);
-        }
-
-        printf("Fin du processus père\n");
-        exit(EXIT_SUCCESS);
-    }
+    return 0;
 }
-
